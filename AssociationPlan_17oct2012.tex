@@ -1,0 +1,81 @@
+\documentclass{article}\usepackage{graphicx, color}
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{amsmath}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+            bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+            breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+{hyperref}
+\hypersetup{
+  pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+
+\begin{document}
+
+
+\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}l c r}
+\textbf{Association Plan} & \textbf{17 October 2012} & \textbf{Kezia Manlove}\\
+\end{tabular*}
+
+\vspace{.1in}
+\subsection*{Objectives}
+The objectives of this investigation are 
+\begin{enumerate}
+  \item Estimate parameters governing fission-fusion dynamics in bighorn sheep
+  \item Valide the efficacy of the estimated parameters to recreate the observed network structure
+  \item Use simulations to examine how penetrable the bighorn sheep social contact network is to pathogens with varying P(transmission|contact) and duration of infection
+\end{enumerate}
+
+\vspace{.1in}
+\subsection*{Statistical Models}
+
+\vspace{.1in}
+
+I'm planning to start by fitting a few logistic regression models.  I'll limit the data to all instances of any two individual co-occurring.  I'll then look at the NEXT time either of those individuals is seen.  If the individuals still co-occur at that next location event, that will be a success; if they are separate, that will be a failure.
+
+I'll then fit a logistic regression model to those data, using the following predictors (or as many of them as I can get away with).  The first covariates I'll cut will be the italicized ones:
+
+\vspace{.1in}
+
+\underline{Covariates}
+\begin{itemize}
+\item Sex of individual 1
+\item Sex of individual 2
+\item Season (summer, rut, winter)
+\item Population size in that year
+\item Groupsize at time of co-occurrence
+\item Indicator for whether individual 1 has a lamb
+\item Indicator for whether individual 2 has a lamb
+\item Indicator for whether individual 1 had a lamb and lost it in this timestep
+\item Indicator for whether individual 2 had a lamb and lost it in this timestep
+\item Random effect for population
+\item Random effects for (individuals and dyads, at least in a perfect world)
+\end{itemize}
+
+\subsection*{Game-theory-esque simulations}
+Using the parameter estimates from the logistic regression model, I'll build a simulation protocol by which  sheep interact with eachother.  I'm envisioning a setting where at each timestep, individuals decide to interact or not, as a function of their covariates.   It might be fun to describe the characteristics of the random networks this process generates (I'm especially think of network diameter or the distribution of path lengths between individuals, since I'm really interested in population homogeneity, and I think those metrics capture that fairly well).  
+
+\vspace{.1in}
+
+\textit{Potential weakness}:  the statistical model would treat individuals as more or less independent and exchangeable entities.  In reality, there are probably relevant social hierarchies (“groups”) between the individual and the population.  The dyad random effect would account for some of this, but probably wouldn't fully capture it.  I'm not quite sure how else to incorporate it. I'm not sure if it matters much. 
+
+\subsection*{Disease over networks}
+I'll then impose two kinds of disease processes on top of these networks.  I'll start simulations from the same seeds,so that network structure should initially start out along the same path.  I'll simulate two kinds of disease processes: one with a fast acting disease with high mortality, and another with a long infectious period and lower mortality.  The goal is to compare the time over which disease persists in each setting.  I'll also look at population size trajectories (but that won't be the primary focus; I think it will be more a consequence of the disease process).
+
+\vspace{.1in}
+
+The goal is to characterize how a fast-acting vs. slow-acting disease perturbs a social system.  A nice extension is that we might be able to make some general statement about whether pneumonia is more fast-acting or slow-acting (hopefully it's somewhere in between, which lends credence to Raina's feedback models).
+\vspace{.1in}
+
+\textit{Sent to PCC, PJH, EFC 17 October, 2012}
+
+\end{document}
